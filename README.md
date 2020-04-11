@@ -1,0 +1,1 @@
+Xamarin.Nordic.DFU.iOS
