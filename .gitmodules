@@ -1,0 +1,4 @@
+[submodule "Xamarin.Nordic.DFU.iOS.Source"]
+	path = Xamarin.Nordic.DFU.iOS.Source
+	url = git@github.com:NordicSemiconductor/IOS-Pods-DFU-Library.git
+	branch = master

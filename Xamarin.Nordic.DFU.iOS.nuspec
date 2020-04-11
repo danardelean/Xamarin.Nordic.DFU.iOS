@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>mobileapps.nordic.dfu.ios</id>
+    <version>1.1.0</version>
+	<title>Mobileapps Nordic DFU iOS</title>
+    <authors>Laerdal Medical</authors>
+    <owners>Laerdal Medical</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+            Mobileapps Nordic DFU iOS.
+            Binding library for this pod: https://github.com/NordicSemiconductor/IOS-Pods-DFU-Library
+            Current version is 4.6.1, and only ARM64 is supported
+    </description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright Laerdal Medical 2020</copyright>
+    <tags>Mobileapps Nordic DFU iOS</tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+  <files>
+    <!-- Cross-platform reference assemblies -->
+	
+    <!-- iOS reference assemblies -->
+	  <file src="Xamarin.Nordic.DFU.iOS.Bindings/bin/Release/Xamarin.Nordic.DFU.iOS.Bindings.dll" target="lib\Xamarin.iOS10" />
+  </files>
+</package>
