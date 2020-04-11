@@ -15,6 +15,7 @@
     <releaseNotes></releaseNotes>
     <copyright>Copyright Laerdal Medical 2020</copyright>
     <dependencies>
+      <group targetFramework="Xamarin.iOS1.0"/>
     </dependencies>
     <!--<repository type="git" url="https://github.com/Laerdal/Xamarin.Nordic.DFU.Android"
         commit="3487814cf18eb526e510f7a5052079fd21817d5a"/>
