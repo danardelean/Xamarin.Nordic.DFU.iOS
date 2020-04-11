@@ -30,8 +30,8 @@ jobs:
     - name: Run make
       run: make
     
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1@
+    - name: setup-xamarin
+      uses: maxim-lobanov/setup-xamarin@v1.1
       
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
