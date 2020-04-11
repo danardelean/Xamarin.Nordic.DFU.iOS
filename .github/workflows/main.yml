@@ -37,8 +37,11 @@ jobs:
         mono-version: latest
         xcode-version: latest
         
-    - name: Run MSBUILD
-      run: MSBuild -t:Clean -p:Configuration=Release -restore:True
+    - name: Run 'MSBuild'
+      run: MSBuild -p:Configuration=Release -restore:True
+    
+    - name: Run 'nuget pack'
+      run: nuget pack -Symbols -Verbosity Detailed -OutputDirectory "Output"
       
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
@@ -46,4 +49,4 @@ jobs:
         # Artifact name
         name: Xamarin.Nordic.DFU.iOS
         # Directory containing files to upload
-        path: Xamarin.Nordic.DFU.iOS.Bindings
+        path: Output
