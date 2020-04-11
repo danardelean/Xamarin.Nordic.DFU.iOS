@@ -24,6 +24,9 @@ jobs:
       with:
         submodules: true
 
+    - name: Install sharpie
+      run: brew cask install objectivesharpie
+
     - name: Run make
       run: make
       
