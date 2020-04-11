@@ -7,14 +7,17 @@ SHARPIE_PREFIX=Generated_
 
 all: sharpie
 
-$(XBUILD_OUTPUT)iphonesimulator:
+$(BUILD_OUTPUT):
+	mkdir $(BUILD_OUTPUT)
+
+$(XBUILD_OUTPUT)iphonesimulator: $(BUILD_OUTPUT)
 	$(XBUILD) ONLY_ACTIVE_ARCH=NO -project Xamarin.Nordic.DFU.iOS.Source/_Pods.xcodeproj -sdk iphonesimulator -configuration Release clean build
 	mv $(XBUILD_OUTPUT)iphonesimulator/iOSDFULibrary-iOS/iOSDFULibrary.framework $(BUILD_OUTPUT)/iOSDFULibrary-simulator.framework
 	mv $(XBUILD_OUTPUT)iphonesimulator/iOSDFULibrary-iOS/iOSDFULibrary.framework.dSYM $(BUILD_OUTPUT)/iOSDFULibrary-simulator.framework.dSYM
 	mv $(XBUILD_OUTPUT)iphonesimulator/ZIPFoundation-iOS/ZIPFoundation.framework $(BUILD_OUTPUT)/ZIPFoundation-simulator.framework
 	mv $(XBUILD_OUTPUT)iphonesimulator/ZIPFoundation-iOS/ZIPFoundation.framework.dSYM $(BUILD_OUTPUT)/ZIPFoundation-simulator.framework.dSYM
 
-$(XBUILD_OUTPUT)iphoneos:
+$(XBUILD_OUTPUT)iphoneos: $(BUILD_OUTPUT)
 	$(XBUILD) ONLY_ACTIVE_ARCH=NO -project Xamarin.Nordic.DFU.iOS.Source/_Pods.xcodeproj -sdk iphoneos -configuration Release clean build
 	mv $(XBUILD_OUTPUT)iphoneos/iOSDFULibrary-iOS/iOSDFULibrary.framework $(BUILD_OUTPUT)/iOSDFULibrary-iphone.framework
 	mv $(XBUILD_OUTPUT)iphoneos/iOSDFULibrary-iOS/iOSDFULibrary.framework.dSYM $(BUILD_OUTPUT)/iOSDFULibrary-iphone.framework.dSYM
