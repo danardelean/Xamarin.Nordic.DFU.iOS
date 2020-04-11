@@ -14,7 +14,6 @@
     </description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright Laerdal Medical 2020</copyright>
-    <tags>Mobileapps Nordic DFU iOS</tags>
     <dependencies>
     </dependencies>
     <!--<repository type="git" url="https://github.com/Laerdal/Xamarin.Nordic.DFU.Android"
