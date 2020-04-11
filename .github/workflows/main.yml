@@ -46,4 +46,4 @@ jobs:
         # Artifact name
         name: Xamarin.Nordic.DFU.iOS
         # Directory containing files to upload
-        path: /
+        path: Xamarin.Nordic.DFU.iOS.Bindings/bin/Release/
