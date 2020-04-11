@@ -32,6 +32,13 @@ jobs:
     
     - name: setup-xamarin
       uses: maxim-lobanov/setup-xamarin@v1.1
+      with:
+        xamarin-ios-version: latest
+        mono-version: latest
+        xcode-version: latest
+        
+    - name: Run MSBUILD
+      run: MSBuild -t:Clean -p:Configuration=Release -restore:True
       
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
