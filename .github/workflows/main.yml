@@ -30,16 +30,10 @@ jobs:
     - name: Run make
       run: make
       
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
-      
-    - name: Run MSBuild
-      run: MSBuild -t:Clean -p:Configuration=Release -restore:True
-
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
         # Artifact name
         name: Xamarin.Nordic.DFU.iOS
         # Directory containing files to upload
-        path: Xamarin.Nordic.DFU.iOS.Bindings/bin/Release/
+        path: /
