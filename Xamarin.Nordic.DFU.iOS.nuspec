@@ -25,7 +25,7 @@
 
   </metadata>
   <files>
-    <file src="icon.png" target="images\"/>
+    <file src="logo.png" target="images\"/>
     <file src="Xamarin.Nordic.DFU.iOS.Bindings/bin/Release/Xamarin.Nordic.DFU.iOS.Bindings.dll" target="lib\Xamarin.iOS10" />
   </files>
 </package>
