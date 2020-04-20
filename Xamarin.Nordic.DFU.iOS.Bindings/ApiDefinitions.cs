@@ -9,6 +9,7 @@ namespace Xamarin.Nordic.DFU.iOS.Bindings
 	// @interface DFUFirmware : NSObject
 	[BaseType(typeof(NSObject))]
 	[DisableDefaultCtor]
+	[Protocol]
 	interface DFUFirmware
 	{
 		// @property (readonly, copy, nonatomic) NSString * _Nullable fileName;
@@ -63,6 +64,7 @@ namespace Xamarin.Nordic.DFU.iOS.Bindings
 	// @interface DFUFirmwareSize : NSObject
 	[BaseType(typeof(NSObject))]
 	[DisableDefaultCtor]
+	[Protocol]
 	interface DFUFirmwareSize
 	{
 		// @property (readonly, nonatomic) uint32_t softdevice;
@@ -95,10 +97,12 @@ namespace Xamarin.Nordic.DFU.iOS.Bindings
 		CBUUID[] FilterByHint(CBUUID dfuServiceUUID);
 	}
 
+	[Protocol]
     interface IDFUPeripheralSelectorDelegate {}
 
 	// @interface DFUPeripheralSelector : NSObject <DFUPeripheralSelectorDelegate>
 	[BaseType(typeof(NSObject))]
+	[Protocol]
 	interface DFUPeripheralSelector : IDFUPeripheralSelectorDelegate
 	{
 		// -(BOOL)select:(CBPeripheral * _Nonnull)peripheral advertisementData:(NSDictionary<NSString *,id> * _Nonnull)advertisementData RSSI:(NSNumber * _Nonnull)RSSI hint:(NSString * _Nullable)name __attribute__((warn_unused_result));
@@ -125,6 +129,7 @@ namespace Xamarin.Nordic.DFU.iOS.Bindings
 	// @interface DFUServiceController : NSObject
 	[BaseType(typeof(NSObject))]
 	[DisableDefaultCtor]
+	[Protocol]
 	interface DFUServiceController
 	{
 		// -(void)pause;
@@ -171,6 +176,7 @@ namespace Xamarin.Nordic.DFU.iOS.Bindings
 	// @interface DFUServiceInitiator : NSObject
 	[BaseType(typeof(NSObject))]
 	[DisableDefaultCtor]
+	[Protocol]
 	interface DFUServiceInitiator
 	{
 		[Wrap("WeakDelegate")]
@@ -257,6 +263,7 @@ namespace Xamarin.Nordic.DFU.iOS.Bindings
 	// @interface DFUUuid : NSObject
 	[BaseType(typeof(NSObject))]
 	[DisableDefaultCtor]
+	[Protocol]
 	interface DFUUuid
 	{
 		// @property (readonly, nonatomic, strong) CBUUID * _Nonnull uuid;
@@ -275,6 +282,7 @@ namespace Xamarin.Nordic.DFU.iOS.Bindings
 
 	// @interface DFUUuidHelper : NSObject
 	[BaseType(typeof(NSObject))]
+	[Protocol]
 	interface DFUUuidHelper
 	{
 		// @property (readonly, nonatomic, strong) CBUUID * _Nonnull legacyDFUService;
@@ -328,12 +336,14 @@ namespace Xamarin.Nordic.DFU.iOS.Bindings
 
 	// @interface IntelHex2BinConverter : NSObject
 	[BaseType(typeof(NSObject))]
+	[Protocol]
 	interface IntelHex2BinConverter
 	{
 	}
 
 	// @interface LegacyDFUServiceInitiator : DFUServiceInitiator
 	[BaseType(typeof(DFUServiceInitiator))]
+	[Protocol]
 	interface LegacyDFUServiceInitiator
 	{
 		// -(DFUServiceController * _Nullable)startWithTargetWithIdentifier:(NSUUID * _Nonnull)uuid __attribute__((warn_unused_result));
@@ -365,6 +375,7 @@ namespace Xamarin.Nordic.DFU.iOS.Bindings
 
 	// @interface SecureDFUServiceInitiator : DFUServiceInitiator
 	[BaseType(typeof(DFUServiceInitiator))]
+	[Protocol]
 	interface SecureDFUServiceInitiator
 	{
 		// -(DFUServiceController * _Nullable)startWithTargetWithIdentifier:(NSUUID * _Nonnull)uuid __attribute__((warn_unused_result));

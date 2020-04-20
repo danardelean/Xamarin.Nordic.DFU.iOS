@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>xamarin.nordic.dfu.ios</id>
-    <version>4.7.1</version>
+    <id>Xamarin.Nordic.DFU.iOS</id>
+    <version>4.7.1.10</version>
     <title>Nordic OTA DFU for Xamarin.iOS</title>
     <authors>Laerdal Medical</authors>
     <owners>Laerdal Medical</owners>
@@ -15,7 +15,7 @@
     <releaseNotes></releaseNotes>
     <copyright>Copyright Laerdal Medical 2020</copyright>
     <dependencies>
-      <group targetFramework="Xamarin.iOS1.0"/>
+      <group targetFramework="Xamarin.iOS"/>
     </dependencies>
     <!--<repository type="git" url="https://github.com/Laerdal/Xamarin.Nordic.DFU.Android"
         commit="3487814cf18eb526e510f7a5052079fd21817d5a"/>
@@ -26,6 +26,6 @@
   </metadata>
   <files>
     <file src="icon.png" target="images\"/>
-    <file src="Xamarin.Nordic.DFU.iOS.Bindings/bin/Release/Xamarin.Nordic.DFU.iOS.Bindings.dll" target="lib\Xamarin.iOS10" />
+    <file src="Xamarin.Nordic.DFU.iOS.Bindings/bin/Release/*" target="lib\Xamarin.iOS" />
   </files>
 </package>
