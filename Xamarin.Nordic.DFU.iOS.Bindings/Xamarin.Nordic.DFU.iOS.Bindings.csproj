@@ -52,9 +52,6 @@
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Readme.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <NativeReference Include="../Xamarin.Nordic.DFU.iOS.Source.BuildOutput/*-iphone.framework">
       <Kind>Framework</Kind>
       <SmartLink>True</SmartLink>
