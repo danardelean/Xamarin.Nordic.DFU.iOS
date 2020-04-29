@@ -4,7 +4,7 @@ using CoreFoundation;
 using Foundation;
 using ObjCRuntime;
 
-namespace Xamarin.Nordic.DFU.iOS.Bindings
+namespace Xamarin.Nordic.DFU.iOS
 {
 	// @interface DFUFirmware : NSObject
 	[BaseType(typeof(NSObject))]

@@ -1,8 +1,9 @@
 XBUILD=/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
 XBUILD_OUTPUT=Xamarin.Nordic.DFU.iOS.Source/Example/build/Release-
 BUILD_OUTPUT=Xamarin.Nordic.DFU.iOS.Source.BuildOutput
-SHARPIE_OUTPUT=Xamarin.Nordic.DFU.iOS.Bindings
-SHARPIE_NAMESPACE=Xamarin.Nordic.DFU.iOS.Bindings
+NUGET_OUTPUT=Xamarin.Nordic.DFU.iOS.Nuget
+SHARPIE_OUTPUT=Xamarin.Nordic.DFU.iOS
+SHARPIE_NAMESPACE=Xamarin.Nordic.DFU.iOS
 SHARPIE_PREFIX=Generated_
 
 all: sharpie
@@ -37,6 +38,9 @@ $(BUILD_OUTPUT)/ZIPFoundation.framework: $(XBUILD_OUTPUT)iphonesimulator $(XBUIL
 sharpie: $(BUILD_OUTPUT)/iOSDFULibrary.framework $(BUILD_OUTPUT)/ZIPFoundation.framework
 	sharpie bind -p $(SHARPIE_PREFIX) -n $(SHARPIE_NAMESPACE) -o $(SHARPIE_OUTPUT) -framework $(BUILD_OUTPUT)/iOSDFULibrary.framework
 
+nuget:
+	MSBuild $(SHARPIE_OUTPUT)/*.sln -p:Configuration=Release -p:Platform=iPhone -restore:True -p:PackageOutputPath="../$(NUGET_OUTPUT)" -t:rebuild
+
 clean:
 	git clean -dfx
 	cd Xamarin.Nordic.DFU.iOS.Source
@@ -45,3 +49,4 @@ clean:
 	rm -rf $(BUILD_OUTPUT)/*
 	rm $(SHARPIE_OUTPUT)/$(SHARPIE_PREFIX)ApiDefinitions.cs ||:
 	rm $(SHARPIE_OUTPUT)/$(SHARPIE_PREFIX)StructsAndEnums.cs ||:
+	MSBuild $(SHARPIE_OUTPUT)/*.sln -t:clean

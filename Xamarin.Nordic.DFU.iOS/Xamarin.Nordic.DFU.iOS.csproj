@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhone</Platform>
+    <ProjectGuid>{3E1D3404-C8BB-47FE-A9AC-E76C5E0BD9C1}</ProjectGuid>
+    <ProjectTypeGuids>{8FFB629D-F513-41CE-95D2-7ECE97B6EEEC};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Xamarin.Nordic.DFU.iOS</RootNamespace>
+    <AssemblyName>Xamarin.Nordic.DFU.iOS</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>bin/</OutputPath>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <IncludeSource>True</IncludeSource>
+    <IncludeSymbols>True</IncludeSymbols>
+    <NuspecFile>$(AssemblyName).nuspec</NuspecFile>
+    <DebugSymbols>true</DebugSymbols>
+    <NoWarn>NU5105</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <Optimize>true</Optimize>
+    <GitVersionConfig>GitVersion.yml</GitVersionConfig>
+    <!-- sourcelink: Declare that the Repository URL can be published to NuSpec -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- sourcelink: Embed source files that are not tracked by the source control manager to the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- sourcelink: Include PDB in the built .nupkg -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Generated_*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <NativeReference Include="../Xamarin.Nordic.DFU.iOS.Source.BuildOutput/*-iphone.framework">
+      <Kind>Framework</Kind>
+      <SmartLink>True</SmartLink>
+    </NativeReference>
+  </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="GitVersionTask" Version="5.2.4" PrivateAssets="all" Condition=" '$(Configuration)' == 'Release' " />
+        <PackageReference Include="NuGet.Build.Tasks.Pack" Version="5.5.1" PrivateAssets="all" Condition=" '$(Configuration)' == 'Release' " />
+    </ItemGroup>
+
+  <Target Name="SetNuspec" AfterTargets="GetVersion" Condition=" '$(Configuration)' == 'Release' ">
+    <Message Importance="High" Text="GitVersion_InformationalVersion: $(GitVersion_InformationalVersion)" />
+    <Message Importance="High" Text="PackageVersion: $(PackageVersion)" />
+    <Message Importance="High" Text="AssemblySemVer: $(GitVersion_AssemblySemVer)" />
+    <CreateProperty Value="version=$(GitVersion_AssemblySemVer);branch=$(GitVersion_BranchName);commit=$(GitVersion_Sha)">
+      <Output PropertyName="NuspecProperties" TaskParameter="Value" />
+    </CreateProperty>
+  </Target>
+
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
+</Project>

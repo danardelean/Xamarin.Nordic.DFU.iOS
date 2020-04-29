@@ -1,6 +1,6 @@
 using ObjCRuntime;
 
-namespace Xamarin.Nordic.DFU.iOS.Bindings
+namespace Xamarin.Nordic.DFU.iOS
 {
 	[Native]
 	public enum DFUError : long
