@@ -9,8 +9,9 @@
     <icon>images/icon.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-      Enable over the air(OTA) device firmware update(DFU) for Nordic devices using iOS and Bluetooth Low Energy(BLE).
-      This nuget is just a binding library for this native iOS Pod : https://github.com/NordicSemiconductor/IOS-Pods-DFU-Library
+Enable over the air(OTA) device firmware update(DFU) for Nordic devices using iOS and Bluetooth Low Energy(BLE).
+
+This nuget is just a binding library for this native iOS Pod : https://github.com/NordicSemiconductor/IOS-Pods-DFU-Library
     </description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright Laerdal Medical 2020</copyright>
