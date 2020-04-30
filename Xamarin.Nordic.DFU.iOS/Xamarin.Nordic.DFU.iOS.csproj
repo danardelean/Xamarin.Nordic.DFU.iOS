@@ -68,7 +68,7 @@
     <Message Importance="High" Text="GitVersion_InformationalVersion: $(GitVersion_InformationalVersion)" />
     <Message Importance="High" Text="PackageVersion: $(PackageVersion)" />
     <Message Importance="High" Text="AssemblySemVer: $(GitVersion_AssemblySemVer)" />
-    <CreateProperty Value="version=$(GitVersion_AssemblySemVer);branch=$(GitVersion_BranchName);commit=$(GitVersion_Sha)">
+    <CreateProperty Value="assembly=$(AssemblyName);version=$(GitVersion_AssemblySemVer);branch=$(GitVersion_BranchName);commit=$(GitVersion_Sha)">
       <Output PropertyName="NuspecProperties" TaskParameter="Value" />
     </CreateProperty>
   </Target>

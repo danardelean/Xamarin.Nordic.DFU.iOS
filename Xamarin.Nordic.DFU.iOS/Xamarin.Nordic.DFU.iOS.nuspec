@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>Xamarin.Nordic.DFU.iOS</id>
+    <id>$assembly$</id>
     <version>$version$</version>
     <title>Nordic OTA DFU for Xamarin.iOS</title>
     <authors>Laerdal Medical</authors>
@@ -24,6 +24,7 @@
   </metadata>
   <files>
     <file src="icon.png" target="images\"/>
-    <file src="bin/*" target="lib\Xamarin.iOS" />
+    <file src="bin/$assembly$.dll" target="lib\Xamarin.iOS" />
+    <file src="bin/$assembly$.pdb" target="lib\Xamarin.iOS" />
   </files>
 </package>

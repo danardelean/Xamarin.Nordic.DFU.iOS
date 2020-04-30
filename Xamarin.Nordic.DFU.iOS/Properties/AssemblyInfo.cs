@@ -11,13 +11,12 @@ using Foundation;
 
 // Information about this assembly is defined by the following attributes. 
 // Change them to the values specific to your project.
-
 [assembly: AssemblyTitle("Xamarin.Nordic.DFU.iOS")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Binding library for Nordic DFU OTA for iOS")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("(c) Thomas Haukland")]
+[assembly: AssemblyCompany("Laerdal")]
+[assembly: AssemblyProduct("Xamarin.Nordic.DFU.iOS")]
+[assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

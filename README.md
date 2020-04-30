@@ -89,4 +89,3 @@ To create a nuget package from the built Binding Library, simply run :
 ```bash
 nuget pack -Symbols -Verbosity Detailed -OutputDirectory "Xamarin.Nordic.DFU.iOS.Nuget"
 ```
-
