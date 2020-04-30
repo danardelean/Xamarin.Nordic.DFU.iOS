@@ -1,7 +1,7 @@
 XBUILD=/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
 XBUILD_OUTPUT=Xamarin.Nordic.DFU.iOS.Source/Example/build/Release-
 BUILD_OUTPUT=Xamarin.Nordic.DFU.iOS.Source.BuildOutput
-NUGET_OUTPUT=Xamarin.Nordic.DFU.iOS.Nuget
+NUGET_FOLDER=../Xamarin.Nordic.DFU.iOS.Nuget
 SHARPIE_OUTPUT=Xamarin.Nordic.DFU.iOS
 SHARPIE_NAMESPACE=Xamarin.Nordic.DFU.iOS
 SHARPIE_PREFIX=Generated_
@@ -39,7 +39,7 @@ sharpie: $(BUILD_OUTPUT)/iOSDFULibrary.framework $(BUILD_OUTPUT)/ZIPFoundation.f
 	sharpie bind -p $(SHARPIE_PREFIX) -n $(SHARPIE_NAMESPACE) -o $(SHARPIE_OUTPUT) -framework $(BUILD_OUTPUT)/iOSDFULibrary.framework
 
 msbuild:
-	MSBuild $(SHARPIE_OUTPUT)/*.sln -p:Configuration=Release -p:Platform=iPhone -restore:True -p:PackageOutputPath="../$(NUGET_OUTPUT)" -t:rebuild
+	MSBuild $(SHARPIE_OUTPUT)/*.sln -p:Configuration=Release -p:Platform=iPhone -restore:True -p:PackageOutputPath=$(NUGET_FOLDER) -t:rebuild
 
 clean:
 	git clean -dfx
