@@ -38,7 +38,7 @@ $(BUILD_OUTPUT)/ZIPFoundation.framework: $(XBUILD_OUTPUT)iphonesimulator $(XBUIL
 sharpie: $(BUILD_OUTPUT)/iOSDFULibrary.framework $(BUILD_OUTPUT)/ZIPFoundation.framework
 	sharpie bind -p $(SHARPIE_PREFIX) -n $(SHARPIE_NAMESPACE) -o $(SHARPIE_OUTPUT) -framework $(BUILD_OUTPUT)/iOSDFULibrary.framework
 
-nuget:
+msbuild:
 	MSBuild $(SHARPIE_OUTPUT)/*.sln -p:Configuration=Release -p:Platform=iPhone -restore:True -p:PackageOutputPath="../$(NUGET_OUTPUT)" -t:rebuild
 
 clean:

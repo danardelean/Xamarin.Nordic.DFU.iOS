@@ -79,13 +79,5 @@ See [this documentation](https://docs.microsoft.com/en-us/xamarin/cross-platform
 To build the Xamarin ObjectiveC Binding Library project, simply run :
 
 ```bash
-MSBuild -p:Configuration=Release -restore:True
-```
-
-### 5) Create nuget package
-
-To create a nuget package from the built Binding Library, simply run :
-
-```bash
-nuget pack -Symbols -Verbosity Detailed -OutputDirectory "Xamarin.Nordic.DFU.iOS.Nuget"
+make msbuild
 ```
