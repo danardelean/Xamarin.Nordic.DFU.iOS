@@ -25,6 +25,11 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <DefineConstants>DEBUG;</DefineConstants>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchExtraArgs>-v -v -v -v</MtouchExtraArgs>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchFloat32>true</MtouchFloat32>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <Optimize>true</Optimize>
@@ -37,6 +42,9 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <MtouchLink>Full</MtouchLink>
+    <DebugType>pdbonly</DebugType>
+    <MtouchArch>ARM64</MtouchArch>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -55,7 +63,7 @@
   <ItemGroup>
     <NativeReference Include="../Xamarin.Nordic.DFU.iOS.Source.BuildOutput/*-iphone.framework">
       <Kind>Framework</Kind>
-      <SmartLink>True</SmartLink>
+      <SmartLink>False</SmartLink>
     </NativeReference>
   </ItemGroup>
 

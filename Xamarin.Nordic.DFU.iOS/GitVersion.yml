@@ -1,5 +1,5 @@
 mode: ContinuousDeployment
-next-version: 4.7.1.11
+next-version: 4.7.1.39
 assembly-versioning-scheme: MajorMinorPatchTag
 ignore:
   sha: []
