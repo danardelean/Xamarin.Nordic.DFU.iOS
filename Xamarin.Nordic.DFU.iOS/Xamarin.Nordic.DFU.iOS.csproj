@@ -1,19 +1,67 @@
-<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <TargetFrameworks>Xamarin.iOS10</TargetFrameworks>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{8FFB629D-F513-41CE-95D2-7ECE97B6EEEC};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{3E1D3404-C8BB-47FE-A9AC-E76C5E0BD9C1}</ProjectGuid>
+    <TemplateGuid>{b6f3ff35-79b2-4f25-a2fc-60a7cf61013b}</TemplateGuid>
+    <OutputType>Library</OutputType>
     <RootNamespace>Xamarin.Nordic.DFU.iOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Xamarin.Nordic.DFU.iOS</AssemblyName>
-    <OutputPath>bin/</OutputPath>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>bin</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <NativeReference Include="NativeFrameworks\iOSDFULibrary.framework">
+      <Kind>Framework</Kind>
+      <Frameworks>Foundation</Frameworks>
+    </NativeReference>
+    <NativeReference Include="NativeFrameworks\ZIPFoundation.framework">
+      <Kind>Framework</Kind>
+      <Frameworks>Foundation</Frameworks>
+    </NativeReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LinkedSafe.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(AssemblyName).nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+      <PackageReference Include="GitVersionTask" Version="5.2.4" PrivateAssets="all" />
+      <PackageReference Include="NuGet.Build.Tasks.Pack" Version="5.5.1" PrivateAssets="all" />
+  </ItemGroup>
+  <PropertyGroup Condition=" $(GeneratePackageOnBuild) ">
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
     <NuspecFile>$(AssemblyName).nuspec</NuspecFile>
-    <DebugSymbols>true</DebugSymbols>
-    <NoWarn>NU5105</NoWarn>
-    <IsBindingProject>true</IsBindingProject>
-    <EnableDefaultItems>false</EnableDefaultItems>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    
     <GitVersionConfig>GitVersion.yml</GitVersionConfig>
     <!-- sourcelink: Declare that the Repository URL can be published to NuSpec -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -21,44 +69,9 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <!-- sourcelink: Include PDB in the built .nupkg -->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <UpdateVersionProperties>true</UpdateVersionProperties>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <WriteVersionInfoToBuildLog>true</WriteVersionInfoToBuildLog>
+    <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
   </PropertyGroup>
-  <ItemGroup>
-    <None Include="Generated_*.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
-    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="../Xamarin.Nordic.DFU.iOS.Source.BuildOutput/iOSDFULibrary.framework/iOSDFULibrary">
-      <Link>iOSDFULibrary.framework</Link>
-    </None>
-    <NativeReference Include="../Xamarin.Nordic.DFU.iOS.Source.BuildOutput/iOSDFULibrary.framework">
-      <Kind>Framework</Kind>
-      <SmartLink>False</SmartLink>
-      <ForceLoad>True</ForceLoad>
-      <Frameworks>Foundation</Frameworks>
-    </NativeReference>
-    <None Include="../Xamarin.Nordic.DFU.iOS.Source.BuildOutput/ZIPFoundation.framework/ZIPFoundation">
-      <Link>ZIPFoundation.framework</Link>
-    </None>
-    <NativeReference Include="../Xamarin.Nordic.DFU.iOS.Source.BuildOutput/ZIPFoundation.framework">
-      <Kind>Framework</Kind>
-      <SmartLink>False</SmartLink>
-      <ForceLoad>True</ForceLoad>
-      <Frameworks>Foundation</Frameworks>
-    </NativeReference>
-  </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="GitVersionTask" Version="5.2.4" PrivateAssets="all" />
-        <PackageReference Include="NuGet.Build.Tasks.Pack" Version="5.5.1" PrivateAssets="all" />
-    </ItemGroup>
-
-  <Target Name="SetNuspec" AfterTargets="GetVersion">
+  <Target Name="SetNuspec" AfterTargets="GetVersion" Condition=" $(GeneratePackageOnBuild) ">
     <Message Importance="High" Text="GitVersion_InformationalVersion: $(GitVersion_InformationalVersion)" />
     <Message Importance="High" Text="PackageVersion: $(PackageVersion)" />
     <Message Importance="High" Text="AssemblySemVer: $(GitVersion_AssemblySemVer)" />
@@ -66,4 +79,6 @@
       <Output PropertyName="NuspecProperties" TaskParameter="Value" />
     </CreateProperty>
   </Target>
+
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>

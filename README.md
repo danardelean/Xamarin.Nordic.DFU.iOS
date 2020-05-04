@@ -81,3 +81,18 @@ To build the Xamarin ObjectiveC Binding Library project, simply run :
 ```bash
 make msbuild
 ```
+
+
+
+Useful regex :
+
+From :
+@objc (public|internal|open) (class|enum|protocol) ([A-Za-z0-9]*)
+
+To :
+
+@objc($3) $1 $2 $3
+
+Include : 
+
+External/Xamarin.Nordic.DFU.iOS/Xamarin.Nordic.DFU.iOS.Source

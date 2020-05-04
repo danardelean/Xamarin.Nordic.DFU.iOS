@@ -348,3 +348,5 @@ healthchecksdb
 
 /Xamarin.Nordic.DFU.iOS.Source.BuildOutput/**/* 
 /Xamarin.Nordic.DFU.iOS/NugetOutput/**/*
+
+Xamarin.Nordic.DFU.iOS/NativeFrameworks/

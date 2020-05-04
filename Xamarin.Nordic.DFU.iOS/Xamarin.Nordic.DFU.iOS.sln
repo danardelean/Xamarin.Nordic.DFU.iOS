@@ -11,10 +11,8 @@ Global
 		Release|iPhone = Release|iPhone
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3E1D3404-C8BB-47FE-A9AC-E76C5E0BD9C1}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{3E1D3404-C8BB-47FE-A9AC-E76C5E0BD9C1}.Debug|iPhone.Build.0 = Debug|iPhone
-		{3E1D3404-C8BB-47FE-A9AC-E76C5E0BD9C1}.Release|iPhone.ActiveCfg = Release|iPhone
-		{3E1D3404-C8BB-47FE-A9AC-E76C5E0BD9C1}.Release|iPhone.Build.0 = Release|iPhone
+		{3E1D3404-C8BB-47FE-A9AC-E76C5E0BD9C1}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{3E1D3404-C8BB-47FE-A9AC-E76C5E0BD9C1}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

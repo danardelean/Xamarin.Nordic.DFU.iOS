@@ -1,52 +1,40 @@
+
+
+BUILD_FOLDER=Xamarin.Nordic.DFU.iOS
+SOURCE_FOLDER=Xamarin.Nordic.DFU.iOS.Source
+NUGET_FOLDER=Xamarin.Nordic.DFU.iOS.Nuget
+
 XBUILD=/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
-XBUILD_OUTPUT=Xamarin.Nordic.DFU.iOS.Source/Example/build/Release-
-BUILD_OUTPUT=Xamarin.Nordic.DFU.iOS.Source.BuildOutput
-NUGET_FOLDER=../Xamarin.Nordic.DFU.iOS.Nuget
-SHARPIE_OUTPUT=Xamarin.Nordic.DFU.iOS
-SHARPIE_NAMESPACE=Xamarin.Nordic.DFU.iOS
-SHARPIE_PREFIX=Generated_
+
 
 all: sharpie
 
-$(BUILD_OUTPUT):
-	mkdir $(BUILD_OUTPUT)
+$(BUILD_FOLDER)/NativeFrameworks/iOSDFULibrary.framework:
+	$(XBUILD) ONLY_ACTIVE_ARCH=NO -project $(SOURCE_FOLDER)/_Pods.xcodeproj -sdk iphoneos -configuration Release clean build
+	cp -a $(SOURCE_FOLDER)/Example/build/Release-iphoneos/iOSDFULibrary-iOS/. $(BUILD_FOLDER)/NativeFrameworks/
+	cp -a $(SOURCE_FOLDER)/Example/build/Release-iphoneos/ZIPFoundation-iOS/. $(BUILD_FOLDER)/NativeFrameworks/
 
-$(XBUILD_OUTPUT)iphonesimulator: $(BUILD_OUTPUT)
-	$(XBUILD) ONLY_ACTIVE_ARCH=NO -project Xamarin.Nordic.DFU.iOS.Source/_Pods.xcodeproj -sdk iphonesimulator -configuration Release clean build
-	mv $(XBUILD_OUTPUT)iphonesimulator/iOSDFULibrary-iOS/iOSDFULibrary.framework $(BUILD_OUTPUT)/iOSDFULibrary-simulator.framework
-	mv $(XBUILD_OUTPUT)iphonesimulator/iOSDFULibrary-iOS/iOSDFULibrary.framework.dSYM $(BUILD_OUTPUT)/iOSDFULibrary-simulator.framework.dSYM
-	mv $(XBUILD_OUTPUT)iphonesimulator/ZIPFoundation-iOS/ZIPFoundation.framework $(BUILD_OUTPUT)/ZIPFoundation-simulator.framework
-	mv $(XBUILD_OUTPUT)iphonesimulator/ZIPFoundation-iOS/ZIPFoundation.framework.dSYM $(BUILD_OUTPUT)/ZIPFoundation-simulator.framework.dSYM
-
-$(XBUILD_OUTPUT)iphoneos: $(BUILD_OUTPUT)
-	$(XBUILD) ONLY_ACTIVE_ARCH=NO -project Xamarin.Nordic.DFU.iOS.Source/_Pods.xcodeproj -sdk iphoneos -configuration Release clean build
-	mv $(XBUILD_OUTPUT)iphoneos/iOSDFULibrary-iOS/iOSDFULibrary.framework $(BUILD_OUTPUT)/iOSDFULibrary-iphone.framework
-	mv $(XBUILD_OUTPUT)iphoneos/iOSDFULibrary-iOS/iOSDFULibrary.framework.dSYM $(BUILD_OUTPUT)/iOSDFULibrary-iphone.framework.dSYM
-	mv $(XBUILD_OUTPUT)iphoneos/ZIPFoundation-iOS/ZIPFoundation.framework $(BUILD_OUTPUT)/ZIPFoundation-iphone.framework
-	mv $(XBUILD_OUTPUT)iphoneos/ZIPFoundation-iOS/ZIPFoundation.framework.dSYM $(BUILD_OUTPUT)/ZIPFoundation-iphone.framework.dSYM
-
-$(BUILD_OUTPUT)/iOSDFULibrary.framework: $(XBUILD_OUTPUT)iphonesimulator $(XBUILD_OUTPUT)iphoneos
-	cp -R $(BUILD_OUTPUT)/iOSDFULibrary-iphone.framework $(BUILD_OUTPUT)/iOSDFULibrary.framework
-	rm $(BUILD_OUTPUT)/iOSDFULibrary.framework/iOSDFULibrary
-	lipo -create -output $(BUILD_OUTPUT)/iOSDFULibrary.framework/iOSDFULibrary $(BUILD_OUTPUT)/iOSDFULibrary-iphone.framework/iOSDFULibrary $(BUILD_OUTPUT)/iOSDFULibrary-simulator.framework/iOSDFULibrary
-
-$(BUILD_OUTPUT)/ZIPFoundation.framework: $(XBUILD_OUTPUT)iphonesimulator $(XBUILD_OUTPUT)iphoneos
-	cp -R $(BUILD_OUTPUT)/ZIPFoundation-iphone.framework $(BUILD_OUTPUT)/ZIPFoundation.framework
-	rm $(BUILD_OUTPUT)/ZIPFoundation.framework/ZIPFoundation
-	lipo -create -output $(BUILD_OUTPUT)/ZIPFoundation.framework/ZIPFoundation $(BUILD_OUTPUT)/ZIPFoundation-iphone.framework/ZIPFoundation $(BUILD_OUTPUT)/ZIPFoundation-simulator.framework/ZIPFoundation
-
-sharpie: $(BUILD_OUTPUT)/iOSDFULibrary.framework $(BUILD_OUTPUT)/ZIPFoundation.framework
-	sharpie bind -p $(SHARPIE_PREFIX) -n $(SHARPIE_NAMESPACE) -o $(SHARPIE_OUTPUT) -framework $(BUILD_OUTPUT)/iOSDFULibrary.framework
+sharpie: $(BUILD_FOLDER)/NativeFrameworks/iOSDFULibrary.framework
+	sharpie bind -p Generated_ -n $(BUILD_FOLDER) -o $(BUILD_FOLDER) -framework $(BUILD_FOLDER)/NativeFrameworks/iOSDFULibrary.framework
 
 msbuild:
-	MSBuild $(SHARPIE_OUTPUT)/*.sln -p:Configuration=Release -p:Platform=iPhone -restore:True -p:PackageOutputPath=$(NUGET_FOLDER) -t:rebuild
+	MSBuild $(BUILD_FOLDER)/*.sln -p:Configuration=Release -p:Platform=iPhone -restore:True -p:PackageOutputPath=../$(NUGET_FOLDER) -t:rebuild
 
 clean:
+	# Cleaning repo
 	git clean -dfx
-	cd Xamarin.Nordic.DFU.iOS.Source
+	# Cleaning submodule repo
+	cd $(SOURCE_FOLDER)
 	git clean -dfx
 	cd ..
-	rm -rf $(BUILD_OUTPUT)/*
-	rm $(SHARPIE_OUTPUT)/$(SHARPIE_PREFIX)ApiDefinitions.cs ||:
-	rm $(SHARPIE_OUTPUT)/$(SHARPIE_PREFIX)StructsAndEnums.cs ||:
-	MSBuild $(SHARPIE_OUTPUT)/*.sln -t:clean
+	# Cleaning outputs
+	rm -rf $(BUILD_FOLDER)/NativeFrameworks/*
+	# Cleaning nuget output
+	rm -rf $(NUGET_FOLDER)/*
+	# Cleaning nuget cache
+	rm -rf ~/.nuget/packages/xamarin.nordic.dfu.ios
+	# Cleaning sharpie output
+	rm $(BUILD_FOLDER)/Generated_ApiDefinitions.cs ||:
+	rm $(BUILD_FOLDER)/Generated_StructsAndEnums.cs ||:
+	# Cleaning MSBuild output
+	MSBuild $(BUILD_FOLDER)/*.sln -t:clean
