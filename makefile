@@ -21,12 +21,6 @@ msbuild:
 	MSBuild $(BUILD_FOLDER)/*.sln -p:Configuration=Release -p:Platform=iPhone -restore:True -p:PackageOutputPath=../$(NUGET_FOLDER) -t:rebuild
 
 clean:
-	# Cleaning repo
-	git clean -dfx
-	# Cleaning submodule repo
-	cd $(SOURCE_FOLDER)
-	git clean -dfx
-	cd ..
 	# Cleaning outputs
 	rm -rf $(BUILD_FOLDER)/NativeFrameworks/*
 	# Cleaning nuget output

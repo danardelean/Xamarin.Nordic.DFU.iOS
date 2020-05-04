@@ -50,35 +50,36 @@
     <Compile Include="LinkedSafe.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="$(AssemblyName).nuspec" />
-  </ItemGroup>
-  <ItemGroup>
-      <PackageReference Include="GitVersionTask" Version="5.2.4" PrivateAssets="all" />
-      <PackageReference Include="NuGet.Build.Tasks.Pack" Version="5.5.1" PrivateAssets="all" />
-  </ItemGroup>
-  <PropertyGroup Condition=" $(GeneratePackageOnBuild) ">
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <IncludeSource>True</IncludeSource>
-    <IncludeSymbols>True</IncludeSymbols>
-    <NuspecFile>$(AssemblyName).nuspec</NuspecFile>
-    <GitVersionConfig>GitVersion.yml</GitVersionConfig>
-    <!-- sourcelink: Declare that the Repository URL can be published to NuSpec -->
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <!-- sourcelink: Embed source files that are not tracked by the source control manager to the PDB -->
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <!-- sourcelink: Include PDB in the built .nupkg -->
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
-  </PropertyGroup>
-  <Target Name="SetNuspec" AfterTargets="GetVersion" Condition=" $(GeneratePackageOnBuild) ">
-    <Message Importance="High" Text="GitVersion_InformationalVersion: $(GitVersion_InformationalVersion)" />
-    <Message Importance="High" Text="PackageVersion: $(PackageVersion)" />
-    <Message Importance="High" Text="AssemblySemVer: $(GitVersion_AssemblySemVer)" />
-    <CreateProperty Value="assembly=$(AssemblyName);version=$(GitVersion_AssemblySemVer);branch=$(GitVersion_BranchName);commit=$(GitVersion_Sha)">
-      <Output PropertyName="NuspecProperties" TaskParameter="Value" />
-    </CreateProperty>
-  </Target>
-
+<!-- PACKAGING START-->
+    <ItemGroup>
+        <None Include="$(AssemblyName).nuspec" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="GitVersionTask" Version="5.2.4" PrivateAssets="all" />
+        <PackageReference Include="NuGet.Build.Tasks.Pack" Version="5.5.1" PrivateAssets="all" />
+    </ItemGroup>
+    <PropertyGroup Condition=" $(GeneratePackageOnBuild) ">
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <IncludeSource>True</IncludeSource>
+        <IncludeSymbols>True</IncludeSymbols>
+        <NuspecFile>$(AssemblyName).nuspec</NuspecFile>
+        <GitVersionConfig>GitVersion.yml</GitVersionConfig>
+        <!-- sourcelink: Declare that the Repository URL can be published to NuSpec -->
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <!-- sourcelink: Embed source files that are not tracked by the source control manager to the PDB -->
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <!-- sourcelink: Include PDB in the built .nupkg -->
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+        <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
+    </PropertyGroup>
+    <Target Name="SetNuspec" AfterTargets="GetVersion" Condition=" $(GeneratePackageOnBuild) ">
+        <Message Importance="High" Text="GitVersion_InformationalVersion: $(GitVersion_InformationalVersion)" />
+        <Message Importance="High" Text="PackageVersion: $(PackageVersion)" />
+        <Message Importance="High" Text="AssemblySemVer: $(GitVersion_AssemblySemVer)" />
+        <CreateProperty Value="assembly=$(AssemblyName);version=$(GitVersion_AssemblySemVer);branch=$(GitVersion_BranchName);commit=$(GitVersion_Sha)">
+        <Output PropertyName="NuspecProperties" TaskParameter="Value" />
+        </CreateProperty>
+    </Target>
+<!-- PACKAGING END-->
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>
