@@ -346,7 +346,5 @@ ASALocalRun/
 # BeatPulse healthcheck temp database 
 healthchecksdb
 
-/Xamarin.Nordic.DFU.iOS.Source.BuildOutput/**/* 
-/Xamarin.Nordic.DFU.iOS/NugetOutput/**/*
-
-Xamarin.Nordic.DFU.iOS/NativeFrameworks/
+Xamarin.Nordic.DFU.iOS.Nuget/*
+Xamarin.Nordic.DFU.iOS/NativeFrameworks/*
