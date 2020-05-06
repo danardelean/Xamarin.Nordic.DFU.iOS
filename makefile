@@ -18,9 +18,9 @@ sharpie: $(BUILD_FOLDER)/NativeFrameworks/iOSDFULibrary.framework
 
 msbuild:
 ifdef NUGET_FOLDER
-	MSBuild $(SOURCE_FOLDER)/*.sln -t:Rebuild -restore:True -p:Configuration=Release -p:Platform=iPhone -p:PackageOutputPath=$(NUGET_FOLDER)
+	MSBuild $(BUILD_FOLDER)/*.sln -t:Rebuild -restore:True -p:Configuration=Release -p:Platform=iPhone -p:PackageOutputPath=$(NUGET_FOLDER)
 else
-	MSBuild $(SOURCE_FOLDER)/*.sln -t:Rebuild -restore:True -p:Configuration=Release -p:Platform=iPhone 
+	MSBuild $(BUILD_FOLDER)/*.sln -t:Rebuild -restore:True -p:Configuration=Release -p:Platform=iPhone 
 endif
 
 clean:
