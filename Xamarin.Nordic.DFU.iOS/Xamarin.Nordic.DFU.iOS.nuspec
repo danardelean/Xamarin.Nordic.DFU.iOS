@@ -20,7 +20,7 @@ This nuget is just a binding library for this native iOS Pod : https://github.co
     <license type="expression">MIT</license>
     <tags>Xamarin Nordic DFU iOS</tags>
     <dependencies>
-        <group targetFramework="Xamarin.iOS10">
+        <group targetFramework="Xamarin.iOS0.0">
             <dependency id="Xamarin.iOS.SwiftRuntimeSupport" version="0.2.0"/>
         </group>
     </dependencies>
